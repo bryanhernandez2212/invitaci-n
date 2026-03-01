@@ -49,6 +49,52 @@
           </div>
           <div class="years">¡Cumplo <span class="years-num">7</span> años!</div>
         </div>
+        <div class="music" id="music">
+          <div class="music-card" id="musicCard">
+            <button class="music-btn" id="musicBtn" aria-label="Reproducir música">
+              <svg class="music-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path id="iconPlay" d="M8 5v14l11-7z" fill="currentColor"/>
+              </svg>
+            </button>
+            <div class="music-info">
+              <div class="music-title">K‑Pop Mix</div>
+              <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span class="fill" id="musicBar"></span>
+              </div>
+            </div>
+            <div class="eq" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <audio id="musicAudio" preload="none" src="audio/track.mp3" data-title="Tu canción"></audio>
+        </div>
+        <div class="date-strip" aria-label="Fecha del evento">
+          <div class="date-col left">
+            <div class="date-day">15</div>
+          </div>
+          <div class="date-sep" aria-hidden="true"></div>
+          <div class="date-col center">
+            <div class="date-month">MARZO</div>
+          </div>
+          <div class="date-sep" aria-hidden="true"></div>
+          <div class="date-col right">
+            <div class="date-year">2026</div>
+          </div>
+        </div>
+        <div class="address" aria-label="Dirección">
+          <div class="address-pill">
+            <svg class="address-ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 1 7 7c0 5.25-6.12 11.07-6.38 11.31a.9.9 0 0 1-1.24 0C11.12 20.07 5 14.25 5 9a7 7 0 0 1 7-7m0 9.5A2.5 2.5 0 1 0 12 6a2.5 2.5 0 0 0 0 5.5Z"/></svg>
+            <div class="address-text">Av. Estrella 123, Barrio Centro, Ciudad</div>
+          </div>
+        </div>
+        <div class="closing">
+          <div class="closing-photo">
+            <div class="polaroid alt">
+              <img src="img/tercera.PNG" alt="Foto adicional">
+            </div>
+          </div>
+          <div class="closing-text">Espero poder contigo en mi día tan especial, ¡no faltes!!</div>
+        </div>
       </div>
     </div>
   </div>
@@ -161,6 +207,47 @@
       resize();
       start();
       window.addEventListener('resize', ()=>{resize(); start();});
+    })();
+    (function(){
+      const btn=document.getElementById('musicBtn');
+      const audio=document.getElementById('musicAudio');
+      const icon=document.getElementById('iconPlay');
+      const music=document.getElementById('music');
+      const card=document.getElementById('musicCard');
+      const bar=document.getElementById('musicBar');
+      const titleEl=document.querySelector('.music-title');
+      if(!btn||!audio||!icon||!music) return;
+      function setPlaying(p){
+        music.classList.toggle('playing', p);
+        if(card) card.classList.toggle('playing', p);
+        icon.setAttribute('d', p ? 'M6 5h5v14H6zM13 5h5v14h-5z' : 'M8 5v14l11-7z');
+      }
+      const initTitle = ()=>{
+        if(!titleEl) return;
+        const raw = audio.dataset.title || audio.currentSrc || audio.src || '';
+        const name = raw.split('/').pop().split('#')[0].split('?')[0].replace(/\.[^.]+$/,'').replace(/[-_]/g,' ').trim();
+        titleEl.textContent = name || 'Música';
+      };
+      initTitle();
+      btn.addEventListener('click', async ()=>{
+        try{
+          if(audio.paused){ await audio.play(); setPlaying(true); }
+          else{ audio.pause(); setPlaying(false); }
+        }catch(e){}
+      });
+      audio.addEventListener('timeupdate', ()=>{
+        if(!bar) return;
+        const p = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        bar.style.width = `${p}%`;
+        const pb = btn.getAttribute('aria-label') || 'Reproducir música';
+        const now = Math.round(p);
+        const pr = document.querySelector('.bar');
+        if(pr){ pr.setAttribute('aria-valuenow', String(now)); }
+      });
+      audio.addEventListener('loadedmetadata', initTitle);
+      audio.addEventListener('error', ()=>{ if(titleEl) titleEl.textContent = 'Archivo no disponible'; });
+      audio.addEventListener('ended', ()=>setPlaying(false));
+      document.addEventListener('visibilitychange', ()=>{ if(document.hidden && !audio.paused){ audio.pause(); setPlaying(false); }});
     })();
   </script>
 </body>

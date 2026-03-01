@@ -203,6 +203,231 @@ body{
   text-shadow:0 0 16px rgba(255,213,74,.55), 0 0 28px rgba(255,153,0,.35);
   animation:glowPulse 3.2s ease-in-out infinite;
 }
+
+/* Fecha estilo card */
+.date-strip{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:18px;
+  margin:6px 0 26px;
+}
+.date-col{ display:flex; flex-direction:column; align-items:center; }
+.date-sep{
+  width:6px;
+  height:80px;
+  background:repeating-linear-gradient(to bottom, rgba(255,255,255,.95) 0 6px, rgba(255,255,255,0) 6px 12px);
+  filter:drop-shadow(0 0 4px rgba(255,255,255,.45));
+}
+.date-day{
+  font-family:Fredoka, Kanit, Poppins, sans-serif;
+  font-weight:900;
+  font-size:clamp(52px, 12.5vw, 90px);
+  line-height:.8;
+  background:linear-gradient(180deg,#ff7cc8,#ff4fa8);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  -webkit-text-stroke:6px #6a1f86;
+  text-shadow:0 0 16px rgba(255,124,200,.5);
+}
+.date-month{
+  margin-top:2px;
+  font-weight:900;
+  letter-spacing:.22em;
+  font-size:clamp(18px, 4.8vw, 34px);
+  color:#ffffff;
+  -webkit-text-stroke:3px #7a2d9b;
+  text-shadow:0 0 10px rgba(255,255,255,.35);
+}
+.date-year{
+  margin-top:2px;
+  font-weight:700;
+  font-size:clamp(24px, 6vw, 40px);
+  color:#ffe182;
+  -webkit-text-stroke:2px #6a1f86;
+  text-shadow:0 0 8px rgba(255,225,130,.4);
+}
+/* Animación de aparición escalonada para la fecha */
+.date-strip > *{
+  opacity:0;
+  transform:translateY(12px);
+  animation:fadeUp .7s ease-out forwards;
+}
+.date-strip > *:nth-child(1){animation-delay:.05s}
+.date-strip > *:nth-child(2){animation-delay:.15s}
+.date-strip > *:nth-child(3){animation-delay:.25s}
+.date-strip > *:nth-child(4){animation-delay:.35s}
+.date-strip > *:nth-child(5){animation-delay:.45s}
+  
+.music{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  margin:12px 0 16px;
+}
+.music-card{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:12px 16px;
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 14px 34px rgba(0,0,0,.35);
+  backdrop-filter:blur(8px);
+  animation:popIn .6s ease-out both;
+}
+.music-btn{
+  position:relative;
+  width:72px; height:72px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #ffffff 0%, #ffe8ff 60%, #d9b2ff 100%);
+  box-shadow:0 8px 28px rgba(0,0,0,.35), 0 0 24px rgba(122,45,155,.45);
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  border:none;
+  outline:none;
+  transform:translateZ(0);
+}
+.music-btn::after{
+  content:"";
+  position:absolute; inset:-4px;
+  border-radius:inherit;
+  background:conic-gradient(from 0deg, #ff7cc8, #7ae9ff, #ffe182, #ff7cc8);
+  filter:blur(6px);
+  opacity:.45;
+  z-index:-1;
+  transition:opacity .3s ease;
+}
+.music.playing .music-btn::after{opacity:.9; animation:spin 6s linear infinite}
+.music-btn:active{transform:scale(.98)}
+.music-icon{
+  width:34px; height:34px;
+  color:#7a2d9b;
+}
+.music-info{min-width:160px}
+.music-title{
+  font-weight:800; letter-spacing:.04em; color:#fff;
+  text-shadow:0 0 10px rgba(255,255,255,.35);
+  margin-bottom:6px;
+}
+.bar{
+  position:relative; width:240px; height:8px; border-radius:8px;
+  background:rgba(255,255,255,.18); overflow:hidden;
+}
+.bar .fill{
+  position:absolute; left:0; top:0; bottom:0; width:0%;
+  background:linear-gradient(90deg, #7ae9ff, #ff7cc8);
+  box-shadow:0 0 10px rgba(122,233,255,.6);
+}
+.eq{
+  display:flex;
+  align-items:flex-end;
+  gap:4px;
+  height:44px;
+}
+.eq span{
+  width:6px; background:linear-gradient(180deg,#ff7cc8,#7ae9ff);
+  border-radius:3px; height:10px;
+  animation:beat 900ms ease-in-out infinite alternate;
+  animation-play-state:paused;
+}
+.eq span:nth-child(2){animation-duration:840ms}
+.eq span:nth-child(3){animation-duration:980ms}
+.eq span:nth-child(4){animation-duration:760ms}
+.eq span:nth-child(5){animation-duration:1020ms}
+.music.playing .eq span{animation-play-state:running}
+@keyframes beat{
+  from{height:10px}
+  to{height:40px}
+}
+@keyframes spin{ to{ transform:rotate(360deg) } }
+
+.address{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:6px 0 18px;
+}
+.address-pill{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 16px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 26px rgba(0,0,0,.28);
+  backdrop-filter:blur(8px);
+  animation:slideIn .7s ease-out both .2s;
+}
+.address-ic{
+  width:18px; height:18px; color:#7ae9ff; filter:drop-shadow(0 0 6px rgba(122,233,255,.6));
+}
+.address-text{
+  font-family:Kanit, Poppins, system-ui, sans-serif;
+  font-weight:700;
+  letter-spacing:.02em;
+  color:#aef7ff;
+  text-shadow:0 0 10px rgba(122,233,255,.4);
+  font-size:clamp(14px, 3.6vw, 18px);
+}
+.closing{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  margin:20px 0 28px;
+  flex-wrap:nowrap;
+}
+.closing-photo .polaroid{padding:14px 14px 38px}
+.polaroid.alt{ transform:rotate(2deg); animation:floatCardAlt 8s ease-in-out infinite }
+.closing-photo .polaroid.alt{
+  background:transparent;
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+}
+.closing-photo img{ width:min(300px, 64vw); border-radius:10px; display:block; animation:fadeUp .7s ease-out both }
+.closing-text{
+  flex:1 1 0;
+  max-width:min(560px, 90vw);
+  font-family:Poppins, system-ui, sans-serif;
+  font-weight:800;
+  font-size:clamp(18px, 4.8vw, 28px);
+  line-height:1.25;
+  color:#ffffff;
+  margin:6px 0;
+  text-shadow:0 0 16px rgba(255,255,255,.25), 0 0 28px rgba(122,45,155,.25);
+  animation:slideInRight .7s ease-out both .1s;
+}
+.closing-photo{flex:0 0 auto}
+@keyframes floatCardAlt{
+  0%,100%{transform:translateY(0) rotate(2deg)}
+  50%{transform:translateY(-8px) rotate(1deg)}
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(14px)}
+  to{opacity:1; transform:translateY(0)}
+}
+@keyframes slideIn{
+  from{opacity:0; transform:translateY(16px) scale(.98)}
+  to{opacity:1; transform:translateY(0) scale(1)}
+}
+@keyframes slideInRight{
+  from{opacity:0; transform:translateX(18px)}
+  to{opacity:1; transform:translateX(0)}
+}
+@media (max-width:780px){
+  .closing{flex-direction:row; flex-wrap:nowrap; gap:14px}
+  .closing-photo{flex:0 0 44%}
+  .closing-photo img{width:42vw}
+  .closing-text{flex:1 1 56%; text-align:left; padding:0; font-size:clamp(16px, 4.2vw, 22px)}
+}
 .notes,.note-fx,.conf,.spark{display:none}
 @media (max-width:820px){
   .hero-img{width:94vw}
