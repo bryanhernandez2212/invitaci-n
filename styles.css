@@ -46,14 +46,19 @@ body{
   overflow:visible;
 }
 .tag,.title,.subtitle,.grid,.pill,.cta,.btn,.stickers,.welcome,.note,.footer{display:none}
-.curve-wrap{
+.hero-block{
+  position:relative;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  margin:-6px 0 -36px;
-  pointer-events:none;
+  width:100%;
+}
+.curve-wrap{
   position:relative;
-  z-index:2;
+  margin:0 0 -28px;
+  z-index:5;
+  pointer-events:none;
 }
 .curve{
   width:min(92vw, 720px);
@@ -70,12 +75,9 @@ body{
   letter-spacing:.02em;
 }
 .hero-photo{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:-28px 0 12px;
   position:relative;
   z-index:1;
+  margin:0 0 12px;
 }
 .hero-img{
   width:min(92vw, 720px);
@@ -86,6 +88,120 @@ body{
   border-radius:0;
   box-shadow:none;
   background:transparent;
+}
+.name-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:10px 0 8px;
+  position:relative;
+}
+.name{
+  font-family:Fredoka, Kanit, Poppins, sans-serif;
+  font-weight:900;
+  font-size:clamp(64px, 13vw, 132px);
+  line-height:1;
+  color:#ffffff;
+  -webkit-text-stroke:7px #7a2d9b;
+  text-shadow:0 0 16px rgba(255,255,255,.4), 0 0 34px rgba(122,45,155,.35);
+  letter-spacing:.02em;
+  animation:glowPulse 3s ease-in-out infinite, popIn .6s ease-out both;
+}
+.name-underline{
+  position:absolute;
+  bottom:-12px;
+  left:50%;
+  width:60%;
+  height:8px;
+  border-radius:8px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg, transparent, #ffffff, transparent);
+  filter:blur(.2px);
+  opacity:.9;
+  animation:sweep 2.8s linear infinite;
+}
+.name-stars{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.name-stars span{
+  position:absolute;
+  width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0) 70%);
+  animation:twinkle 3s ease-in-out infinite;
+  opacity:.9;
+}
+.name-stars span:nth-child(1){top:6%; left:12%; animation-delay:.1s}
+.name-stars span:nth-child(2){top:10%; right:10%; animation-delay:.6s}
+.name-stars span:nth-child(3){bottom:14%; left:18%; animation-delay:1.2s}
+.name-stars span:nth-child(4){bottom:12%; right:16%; animation-delay:1.7s}
+.name-stars span:nth-child(5){top:50%; left:4%; animation-delay:2.1s}
+.name-stars span:nth-child(6){top:46%; right:6%; animation-delay:2.6s}
+@keyframes popIn{
+  0%{transform:translateY(10px) scale(.94); opacity:.0}
+  60%{transform:translateY(0) scale(1.02); opacity:1}
+  100%{transform:scale(1)}
+}
+@keyframes twinkle{
+  0%,100%{transform:scale(.8); opacity:.7}
+  50%{transform:scale(1.2); opacity:1}
+}
+@keyframes glowPulse{
+  0%,100%{text-shadow:0 0 10px rgba(255,255,255,.35), 0 0 26px rgba(122,45,155,.25)}
+  50%{text-shadow:0 0 20px rgba(255,255,255,.6), 0 0 42px rgba(122,45,155,.45)}
+}
+@keyframes sweep{
+  0%{transform:translateX(-120%) scaleX(.8)}
+  50%{transform:translateX(-50%) scaleX(1)}
+  100%{transform:translateX(120%) scaleX(.8)}
+}
+
+.photo-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin:22px 0 16px;
+}
+.polaroid{
+  background:#ffffff;
+  padding:14px 14px 48px;
+  border-radius:14px;
+  box-shadow:0 24px 46px rgba(0,0,0,.35);
+  transform:rotate(-2deg);
+  animation:floatCard 8s ease-in-out infinite;
+}
+.polaroid img{
+  width:min(320px, 78vw);
+  height:auto;
+  display:block;
+  border-radius:10px;
+}
+@keyframes floatCard{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-8px) rotate(-1deg)}
+}
+.years{
+  font-family:Fredoka, Kanit, Poppins, sans-serif;
+  font-weight:900;
+  font-size:clamp(32px, 8.6vw, 56px);
+  line-height:1.05;
+  color:#ffffff;
+  -webkit-text-stroke:5px #7a2d9b;
+  letter-spacing:.02em;
+  text-shadow:0 0 14px rgba(255,255,255,.4), 0 0 30px rgba(122,45,155,.35);
+  animation:glowPulse 3.2s ease-in-out infinite;
+}
+.years-num{
+  font-size:1.45em;
+  color:#ffd54a;
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  -webkit-text-stroke:7px #6a1f86;
+  text-shadow:0 0 16px rgba(255,213,74,.55), 0 0 28px rgba(255,153,0,.35);
+  animation:glowPulse 3.2s ease-in-out infinite;
 }
 .notes,.note-fx,.conf,.spark{display:none}
 @media (max-width:820px){

@@ -15,25 +15,40 @@
   <div class="scene">
     <div class="glow"></div>
     <div class="card">
-      <div class="curve-wrap">
-        <svg class="curve" viewBox="0 0 700 300" aria-label="Te invito a mi cumpleaños">
-          <defs>
-            <filter id="svgGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-          <path id="arcTop" d="M 60 288 A 330 330 0 0 1 640 288" fill="none"/>
-          <text filter="url(#svgGlow)" font-size="52">
-            <textPath href="#arcTop" startOffset="50%" text-anchor="middle" dy="22">Te invito a mi cumpleaños</textPath>
-          </text>
-        </svg>
-      </div>
-      <div class="hero-photo">
-        <img class="hero-img" src="img/imagen-cumple.PNG" alt="Imagen del cumpleaños">
+      <div class="hero-block">
+        <div class="curve-wrap">
+          <svg class="curve" viewBox="0 0 700 300" aria-label="Te invito a mi cumpleaños">
+            <defs>
+              <filter id="svgGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <path id="arcTop" d="M 60 288 A 330 330 0 0 1 640 288" fill="none"/>
+            <text filter="url(#svgGlow)" font-size="60">
+              <textPath href="#arcTop" startOffset="50%" text-anchor="middle" dy="22">Te invito a mi cumpleaños</textPath>
+            </text>
+          </svg>
+        </div>
+        <div class="hero-photo">
+          <img class="hero-img" src="img/segunda.PNG" alt="Imagen del cumpleaños">
+        </div>
+        <div class="name-wrap">
+          <div class="name">Emilia</div>
+          <div class="name-underline" aria-hidden="true"></div>
+          <div class="name-stars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="photo-card">
+          <div class="polaroid">
+            <img src="img/segunda.PNG" alt="Foto destacada">
+          </div>
+          <div class="years">¡Cumplo <span class="years-num">7</span> años!</div>
+        </div>
       </div>
     </div>
   </div>
